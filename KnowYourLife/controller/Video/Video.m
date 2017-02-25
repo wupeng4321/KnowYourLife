@@ -180,7 +180,7 @@
         cell = [[VisualTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
     }
     //[MBProgressHUD hideHUDForView:cell.playerView animated:YES];
-    VisualModel *model = _dataArray[indexPath.row + 10];
+    VisualModel *model = _dataArray[indexPath.row];
     
     cell.visualModel = model;
     

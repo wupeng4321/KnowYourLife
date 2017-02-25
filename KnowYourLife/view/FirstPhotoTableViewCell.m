@@ -13,9 +13,6 @@
 #define HEIGHTOFSCREEN [UIScreen mainScreen].bounds.size.height
 @implementation FirstPhotoTableViewCell
 
-- (void)awakeFromNib {
-    
-}
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if ( self) {
@@ -24,9 +21,6 @@
     }
     return self;
 }
-
-
-
 
 -(void)makeUI{
     CGFloat HEIGHT = HEIGHTOFSCREEN-64;
@@ -77,9 +71,6 @@
     [_imageViewArr addObject:_seventhImage];
     [_imageViewArr addObject:_eighthImage];
     [_imageViewArr addObject:_ninthImage];
-    
-    _firstImage.backgroundColor = [UIColor redColor];
-    
 }
 
 -(void)setImgGroupArr:(NSMutableArray *)imgGroupArr{
@@ -99,10 +90,9 @@
         //添加手势
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TapToDetail:)];
         [imageView addGestureRecognizer:tap];
-        
     }
-    
 }
+
 -(void)TapToDetail:(UITapGestureRecognizer*)tap{
     
     UIImageView * imageView = (id)tap.view;
@@ -115,20 +105,5 @@
     [[NSNotificationCenter defaultCenter] postNotification:noti];
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end
