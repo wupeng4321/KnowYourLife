@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "ZCControl.h"
 #import "UMSocial.h"
+#import <WebKit/WebKit.h>
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
 @interface DetailViewController ()
@@ -58,12 +59,6 @@
     
 }
 -(void)shareButtonClick{
-//    [UMSocialSnsService presentSnsIconSheetView:self
-//                                         appKey:@"507fcab25270157b37000010"
-//                                      shareText:@"你要分享的文字"
-//                                     shareImage:[UIImage imageNamed:@"icon.png"]
-//                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToQQ,nil]
-//                                       delegate:self];
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"507fcab25270157b37000010"
                                       shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
@@ -73,27 +68,12 @@
 }
 
 -(void)createWebView{
-    UIWebView*webView=[[UIWebView alloc]initWithFrame:CGRectMake(0,44, WIDTH, HEIGHT-40)];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 44, WIDTH, HEIGHT - 40)];
     //_urlstr=[NSString stringWithFormat:@"http://yl.cms.palmtrends.com/api_v2.php?action=article&id=%@&fontsize=m&uid=10288928&e=86587cf27fc31a81ad14c8663854ab94&platform=a&pid=10048",_appId];
    // NSLog(@"%@",_urlstr);
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlstr]]];
-    webView.scalesPageToFit=YES;
     [self.view addSubview:webView];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

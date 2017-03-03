@@ -30,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
     [self createTableView];
     
@@ -74,14 +73,10 @@
                 
                 NSLog(@"i=%d",i);
                 [_headArr addObject:model];
-                //[_dataArr removeObject:model];
             }else{
                 [_cellArr addObject:model];
             }
         }
-        NSLog(@"1=%lu",_cellArr.count);
-        NSLog(@"2=%lu",(unsigned long)_headArr.count);
-        NSLog(@"3=%lu", (unsigned long)_dataArr.count);
         [_tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *  operation, NSError *  error) {
@@ -93,7 +88,6 @@
     return 4;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    //NSLog(@"%lu",(unsigned long)_dataArr.count);
     return _dataArr.count/5 ;
 }
 
@@ -104,17 +98,11 @@
     }
     NewsModel * mm = _cellArr[indexPath.section*4+indexPath.row];
     _cellPage = indexPath.section*4+indexPath.row;
-    NSLog(@"_cellPage11111111=%lu", _cellPage);
-    //NSLog(@"%@",mm.titleLabel);
     [cell.iconView sd_setImageWithURL:[NSURL URLWithString:mm.iconUrl]];
     cell.titleLabel.text = mm.titleLabel;
-    
-    //[cell.imageView sd_setImageWithURL:[NSURL URLWithString:mm.iconUrl]];
-    
 
     cell.accessoryType = UITableViewAutomaticDimension;
-    
-    //cell.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -143,68 +131,24 @@
 
 }
 -(void)headerClick:(UITapGestureRecognizer*)tap{
-    //NSLog(@"1");
     UIImageView * imageView = (id)tap.view;
     NewsModel * mm = _headArr[imageView.tag-1];
-    NSLog(@"imageView.tag=%lu",imageView.tag);
     DetailViewController * vc = [[DetailViewController alloc] init];
     
     vc.urlstr = mm.detailUrl;
-    NSLog(@"vc.urlstr=%@",vc.urlstr);
     
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"row=%lu",indexPath.row);
-    NSLog(@"section=%lu",indexPath.section);
-    NSLog(@"_dataArr.count=%lu",_dataArr.count);
     NewsModel * mm = _cellArr[indexPath.section*4+indexPath.row];
-    //NewsModel * mm = _cellArr[_cellPage];
-    NSLog(@"tag=%lu",indexPath.section*4+indexPath.row);
-    
     DetailViewController * vc = [[DetailViewController alloc] init];
     vc.urlstr = mm.detailUrl;
     NSLog(@"%@",mm.detailUrl);
-    
     vc.hidesBottomBarWhenPushed = YES;
-    
     [self.navigationController pushViewController:vc animated:YES];
 
 }
 
-//-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    NSLog(@"row=%lu",indexPath.row);
-//    NSLog(@"section=%lu",indexPath.section);
-//    NSLog(@"_dataArr.count=%lu",_dataArr.count);
-//    NewsModel * mm = _cellArr[indexPath.section*4+indexPath.row+1];
-//    //NewsModel * mm = _cellArr[_cellPage];
-//    NSLog(@"tag=%lu",indexPath.section*4+indexPath.row);
-//    
-//    DetailViewController * vc = [[DetailViewController alloc] init];
-//    vc.urlstr = mm.detailUrl;
-//    NSLog(@"%@",mm.detailUrl);
-//    
-//    vc.hidesBottomBarWhenPushed = YES;
-//    
-//    [self.navigationController pushViewController:vc animated:YES];
-//    
-//}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

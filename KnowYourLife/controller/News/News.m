@@ -12,16 +12,8 @@
 #define SIZE self.view.bounds.size
 #define COUNT 5
 
-#import "TopNewsViewController.h"
-#import "InternetNewsViewController.h"
-#import "ChineseBusinessManViewController.h"
-#import "FirestHomeViewController.h"
-#import "luxuriesViewController.h"
-#import "EverydayMealViewController.h"
-#import "WeiPhoneViewController.h"
-#import "WYBeautyViewController.h"
-#import "MovieNewsViewController.h"
 #import "SDCycleScrollView.h"
+#import "RootForNews.h"
 
 
 @implementation News{
@@ -182,13 +174,21 @@
 }
 //跳转页面
 -(void)buttonClick:(UIButton*)sender{
-    NSArray *classArr = @[@"TopNewsViewController",@"InternetNewsViewController",@"ChineseBusinessManViewController",@"FirestHomeViewController",@"luxuriesViewController",@"EverydayMealViewController",@"WeiPhoneViewController",@"WYBeautyViewController",@"MovieNewsViewController"];
+    NSArray *urls = @[@"http://iphone.myzaker.com/zaker/blog.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=660",
+                      @"http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&act=list&app_id=5",
+                      @"http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=721",
+                      @"http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=11991",
+                      @"http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=1067",
+                      @"http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=11012",
+                      @"http://iphone.myzaker.com/zaker/blog.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=547",
+                      @"http://iphone.myzaker.com/zaker/blog.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=723",
+                      @"http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=6.41&app_id=10530"];
     NSInteger i = sender.tag-10;
-    Class cla=NSClassFromString(classArr[i]);
-    UIViewController * vc =[[cla alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.navigationController.navigationBarHidden = NO;
-    [self.navigationController pushViewController:vc animated:YES];
+    RootForNews *news = [[RootForNews alloc] init];
+    [news loadData:urls[i]];
+    news.hidesBottomBarWhenPushed = YES;
+    news.navigationController.navigationBarHidden = NO;
+    [self.navigationController pushViewController:news animated:YES];
     
 }
 
@@ -213,36 +213,5 @@
 //-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
 //    [Timer setFireDate:[NSDate distantPast]];
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
